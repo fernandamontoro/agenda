@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/reset.css')}}" type="text/css" media="screen">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" media="screen">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/layout.css')}}" type="text/css" media="screen">
+</head>
+<body id="page8">
+	<header>
+			<div class="main">
+				<div class="wrapper">
+					<h1>
+						<img src={{url_for('static', filename='lobo.PNG')}} height="200" width="200" >
+					<br><br>
+						<strong>Roter Wolf</strong>
+					</h1>
+			
+					<nav>
+						<ul class="menu"> <br><br><br>
+							<li><a class="active" href={{url_for("presentacion")}}>PRESENTACION</a></li>
+							<li><a href="registro.html">REGISTRO</a></li>
+							<li><a href="index.html">INICIO SESION</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<section id="content">
+			<div class="main">
+				<div class="border-bot1 img-indent-bot">
+					<h3 align="center">Tu agenda en la palma de tu mano</strong></h3>
+				</div>
+				<div class="wrapper">
+					<article class="col-2">
+						<h2 align="center">Roter Wolf</h2>
+						
+						<h1>El Objetivo de nuestra agenda de contactos virtual es mantener tus contactos a tu alacance desde cualquier dispositivo electronico <br> <br> 
+
+						Ademas de evitar que los datos de tus contactos se pierdan. <br><br> 
+
+						Olvidate de post-it para anotar tus contactos o de la agenda estorbosa que puedes perder en cualquier lugar, mejor descarga nuestra app y vive mas feliz. <br> <br></h1> 
+
+						<p align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXFim42hFFGAFGLKru1lrAXrnOhO1KedUziQ&usqp=CAU"> <img src="data:image/png;base64,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"></p>
+					</article>
+					<article class="col-3">
+						<div class="indent-top">
+							<ul class="list-2"> 
+								<li>
+									<a class="item" >Agrega inifitos contactos</a>
+									<span> Puedes agregar contactos sin limite </span>
+								</li>
+								<li>
+									<a class="item">Edita cualquier contacto</a>
+									<span> Si tu contacto cambio de telefono
+									tienes la opcion de cambiarlo </span>
+								</li>
+								<li>
+									<a class="item">Interfaz amigable</a>
+									<span> La interfaz de la app es muy entendible
+									y flexible, lo puede utilizar cualquier persona 
+									de cualquier edad ya que es amigable con el usuario</span>
+								</li>
+								<li>
+									<a class="item">Envia correos</a>
+									<span> Nuestra app tiene la opcion de 
+									enviar un correo a nuestro contacto </span>
+								</li>
+							</ul>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+		</script>
+	</body>
+</html>
