@@ -21,7 +21,7 @@
 						 <br>
 						 <br>
 						<li><a class="active" href={{url_for("clientes")}}>CONTACTOS</a></li>
-						<li><a href={{url_for("index")}}>CERRAR SESION</a></li> 
+						<li><a id="logout" style="cursor: pointer;">CERRAR SESION</a></li> 
 					</ul>
 				</nav>
 			</div>
@@ -31,11 +31,13 @@
 		<div class="main">
 			<div class="indent-left">
 				<div class="wrapper">
-					<article class="col-5">
 						<h2 align="center"> Contactos </h2> 
 						<article class="col-5">
 							<form action="" method="POST" >
 								<table style="width: 100%">
+									<tr>
+										<th>Agregar contacto</th>
+									</tr>
 									<tr> 
 										<!-- <th>Num. Cliente</th> -->
 										<th>Nombre </th>
@@ -46,54 +48,61 @@
 										<th>Correo</th>
 										<th>Detalles</th>
 									</tr>
-
-									<tr> 
 										<!--<td><input type="text" size="1" name="c0f0" disabled></td> -->
 										<td><input type="text" size="12"name="c1f0"></td>
 										<td><input type="text" size="12" name="c2f0"></td>
-										<td><input type="text" size="8" name="c3f0"></td>
+										<td><input type="tel" size="8" name="c3f0"></td>
 										<td><input type="text" size="12"name="c4f0"></td>
-										<td><input type="text" size="8" name="c5f0"></td>
-										<td><input type="text" size="15"name="c6f0"></td>
+										<td><input type="tel" size="8" name="c5f0"></td>
+										<td><input type="email" size="15"name="c6f0"></td>
 										<td><button class="button" name="boton" value="agregar">Agregar</button></td>
 									</tr>
 									
 								{% for row in result%}
 								
 									{% if row[0] == update %}
+
 									<tr> 
 										<!--<td><input type="text" size="1" name="c0f{{row[0]}}" disabled value="{{row[0]}}"></td>-->
-										<td><input type="text" size="12"name="c1f{{row[0]}}" value="{{row[1]}}"></td>
-										<td><input type="text" size="12" name="c2f{{row[0]}}" value="{{row[2]}}"></td>
-										<td><input type="text" size="8"name="c3f{{row[0]}}" value="{{row[3]}}"></td>
-										<td><input type="text" size="12" name="c4f{{row[0]}}" value="{{row[4]}}"></td>
-										<td><input type="text" size="8" name="c5f{{row[0]}}" value="{{row[5]}}"></td>
-										<td><input type="text" size="15"name="c6f{{row[0]}}" value="{{row[6]}}"></td>
-										<td><button class="button" name="boton" value="cancelar">Cancelar</button></td>
-										<td><button class="button" name="boton" value="aceptar{{row[0]}}">Aceptar</button></td>
+										<td><br><input type="text" size="12"name="c1f{{row[0]}}" value="{{row[1]}}"></td>
+										<td><br><input type="text" size="12" name="c2f{{row[0]}}" value="{{row[2]}}"></td>
+										<td><br><input type="tel" size="8"name="c3f{{row[0]}}" value="{{row[3]}}"></td>
+										<td><br><input type="text" size="12" name="c4f{{row[0]}}" value="{{row[4]}}"></td>
+										<td><br><input type="tel" size="8" name="c5f{{row[0]}}" value="{{row[5]}}"></td>
+										<td><br><input type="email" size="15"name="c6f{{row[0]}}" value="{{row[6]}}"></td>
+										<td><br><button class="button" name="boton" value="cancelar">Cancelar</button></td>
+										<td><br><button class="button" name="boton" value="aceptar{{row[0]}}">Aceptar</button></td>
 									</tr>
 									{% else %}
 									<tr> 
 										<!--<td><input type="text" size="1" name="c0f{{row[0]}}" disabled value="{{row[0]}}"></td>-->
-										<td><input type="text" size="12" name="c1f{{row[0]}}" disabled value="{{row[1]}}"></td><br>
-										<td><input type="text" size="12" name="c2f{{row[0]}}" disabled value="{{row[2]}}"></td>
-										<td><input type="text" size="8" name="c3f{{row[0]}}	" disabled value="{{row[3]}}"></td>
-										<td><input type="text" size="12"name="c4f{{row[0]}}	" disabled value="{{row[4]}}"></td>
-										<td><input type="text" size="8"name="c5f{{row[0]}}	" disabled value="{{row[5]}}"></td>
-										<td><input type="text" size="15" name="c6f{{row[0]}}	" disabled value="{{row[6]}}"></td>
-										<td><button class="button" name="boton" value="eliminar{{row[0]}}">Eliminar</button></td>
-										<td><button class="button" name="boton" value="editar{{row[0]}}">Editar</button></td>
-										<td><button class="button" name="boton" value="aceptar{{row[0]}}">Enviar</button></td>
+										<td><br><input type="text" size="12" name="c1f{{row[0]}}" disabled value="{{row[1]}}"></td><br>
+										<td><br><input type="text" size="12" name="c2f{{row[0]}}" disabled value="{{row[2]}}"></td>
+										<td><br><input type="tel" size="8" name="c3f{{row[0]}}	" disabled value="{{row[3]}}"></td>
+										<td><br><input type="text" size="12"name="c4f{{row[0]}}	" disabled value="{{row[4]}}"></td>
+										<td><br><input type="tel" size="8"name="c5f{{row[0]}}	" disabled value="{{row[5]}}"></td>
+										<td><br><input type="email" size="15" name="c6f{{row[0]}} " disabled value="{{row[6]}}"></td>
+										<td><br><button class="button" name="boton" value="eliminar{{row[0]}}">Eliminar</button></td>
+										<td><br><button class="button" name="boton" value="editar{{row[0]}}">Editar</button></td>
+										
 									</tr>
 									{% endif %}
 								{% endfor %}
 								</table>
 							</form>
-						</article>
 					</article>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+		document.querySelector('#logout').addEventListener('click', () => {
+			fetch('/logout').then( res => {
+				if (res.redirected) {
+					window.location.replace(res.url);
+				}
+			});
+		});
+	</script>
 </body>
 </html>

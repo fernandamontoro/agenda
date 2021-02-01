@@ -11,31 +11,40 @@
 		<div class="main">
 			<div class="wrapper">
 				    <h1>
-						<img src={{url_for('static', filename='lobo.PNG')}} height="200" width="200" >
+						<img src="{{url_for('static', filename='lobo.PNG')}}" height="200" width="200" >
 					<br><br>
 						<strong>Roter Wolf</strong>
 					</h1>
+				</div>
+			</div>
+		</header>
+
 	<section id="content">
 		<div class="main">
 			<div class="indent-left">
 				<div class="wrapper">
 					<article class="col-5">
 						<h2 align="center"> Iniciar Sesion </h2> <br>
-					<article class="col-5">					
-						<form action="" method="POST" id="contact-form"> <center>
-							<fieldset>
-								<label>
-									<input type="text" value="Usuario" onBlur="if(this.value=='') this.value='Usuario'" onFocus="if(this.value =='Usuario' ) this.value=''" name="usuario"/>
-								</label> <br> <br>  
-								<label>
-									<input type="password" value="Contraseña" onBlur="if(this.value=='') this.value='Contraseña'" onFocus="if(this.value =='Contraseña' ) this.value=''" name="contrasena"/>
-								</label> </center>									
-								<div class="buttons-wrapper"> <center>
-									<button class="button">Ingresar</button> 
-									<button class="button">Registrar</button> 
-								</div>
-							</fieldset>
-						</form>
+					<article class="col-5">		
+						<center>
+
+							<form action="/login" method="POST" id="contact-form"> 
+								<fieldset>
+									<label>
+										<input type="text" value="Usuario" onBlur="if(this.value=='') this.value='Usuario'" onFocus="if(this.value =='Usuario' ) this.value=''" name="usuario"/>
+									</label> <br> <br>  
+									<label>
+										<input type="password" value="Contraseña" onBlur="if(this.value=='') this.value='Contraseña'" onFocus="if(this.value =='Contraseña' ) this.value=''" name="contrasena"/>
+									</label> 								
+									<div class="buttons-wrapper" >
+										<center>
+											<button type="submit" class="button">Ingresar</button> 
+											<button type="button" class="button" onclick='window.location="{{url_for("registro")}}"'>Registrar</button> 
+										</center>
+									</div>
+								</fieldset>
+							</form>
+						</center>			
 					</article>
 				</div>
 			</div>
@@ -44,3 +53,4 @@
 	
 </body>
 </html>
+

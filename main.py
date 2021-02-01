@@ -1,93 +1,51 @@
 from flask import * 
 import mysql.connector
+from flask_bcrypt import Bcrypt
+from flask_bootstrap import Bootstrap
+from flask_mail import Mail
+from flask_mail import Message
+from flask_login import LoginManager
+from flask_login import login_user, logout_user, login_required, current_user
+import os
+
 
 db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
-	passwd = "root",
+	password = "root",
 	database = "Proyecto"
 )
 
 cursor = db.cursor()
 
 app = Flask(__name__)
+
 app.secret_key = 'my unobvious secret key'
+app.config['SERVER_NAME'] = 'localhost:5000'
+
+app.config['MAIL_SERVER'] ='smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME']  = 'fernandamontoro7@gmail.com'
+app.config['MAIL_PASSWORD']  = 'ficam40ph'
+
+login_manager = LoginManager()
+login_manager.login_view = '/'
+login_manager.login_message_category = 'info'
+
+mail = Mail(app)
 
 @app.route('/')
 def presentacion():
 	return render_template("presentacion.html")
 
-@app.route("/index", methods=["GET", "POST"])
+@app.route("/index")
 def index():
+	if (len(session) == 0):
+		return render_template("index.html")
 	
-	if (request.method == "POST"):
-		usuario = request.form['usuario']
-		contrasena = request.form['contrasena']
-		
-		if ((usuario == "Fernanda") and (contrasena == "123")):
-			return redirect(url_for("clientes"))
+	return redirect(url_for("clientes"))
 			
-	return render_template("index.html")
-
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
-	mensaje=""
-	msg=""
-	if request.method=='POST':
-		pwd = request.form["pwd"]
-		password = request.form["password"]
-		if pwd != password:
-			mensaje = "Contraseñas no coinciden, intenta de nuevo!"
-			return render_template("registro.html", mensaje = mensaje)
-		else:
-			#Crear usuario en la base de datos
-			nombre=request.form["nombre_usuario"]
-			correo=request.form["email"]
-			pwd = request.form["pwd"]
-			print(nombre,correo,pwd)
-			# Crear objeto para el registro del usuario
-			usuario = Usuario(
-				nombre = nombre,
-				email = correo,
-				pwd = bcrypt.generate_password_hash(pwd).decode('utf-8')
-			)
-			db.session.add(usuario)
-			db.session.commit()
-
-			mensaje = "Usuario registrado!"
-			#Enviar correo
-			msg = Message("Gracias por registrarte en ..", sender="AQUI_CORREO", recipients=[correo])
-			msg.body = "Este es un email de prueba"
-			msg.html = "<p>Este es un email</p>"
-			mail.send(msg)
-			return render_template("registro.html", mensaje = mensaje)
-	return render_template("registro.html", mensaje = mensaje)
-
-@app.route("/loginin" , methods=['GET','POST'])
-def loginin():
-	if request.method == 'POST':
-		#Query filter_by por email
-		email = request.form["email"]
-		pwd = request.form["pwd"]
-		usuario_exite = Usuario.query.filter_by(email=email).first()
-		print(usuario_exite)
-		mensaje= usuario_exite.email
-		#Si lo encuentra entonces
-		if usuario_exite != None:
-			print("Existe")
-			if bcrypt.check_password_hash(usuario_exite.pwd, pwd):
-				print("Usuario autenticado")
-				# Aquí se agregó el método login_user para vincular
-				# el usuario autenticado a la sesión
-				login_user(usuario_exite)
-				
-				if current_user.is_authenticated:
-					flash("Inicio de Sesión Exitoso!!")
-					return redirect("/principal")
-					
-		return render_template("login.html", mensaje = mensaje)
-	print("Login in...")
-	return render_template("login.html")
 
 @app.route("/clientes", methods=["GET", "POST"])
 def clientes():
@@ -119,10 +77,7 @@ def clientes():
 					return render_template("clientes.html", result = result, update = row[0])
 					
 				elif (request.form['boton'] == f"aceptar{row[0]}"):
-					#try:
 					nombre = request.form[f'c1f{row[0]}']
-					#except:
-						#return("dsfsf")
 					rfc = request.form[f'c2f{row[0]}']
 					telefono = request.form[f'c3f{row[0]}']
 					direccion = request.form[f'c4f{row[0]}']
@@ -133,11 +88,53 @@ def clientes():
 					
 		cursor.execute("select * from Cliente;")
 		result = cursor.fetchall()
+	if (len(session) == 0):
+		return redirect(url_for('presentacion'))
 	return render_template("clientes.html", result = result, update = -1)
 
-#@app.route('/registro')
-#def registro():
-#	return render_template("registro.html")
+@app.route('/registro', methods=["GET", "POST"])
+def registro():
+	if (request.method == "GET"):
+		return render_template("registro.html")
+	else:
+		nombre = request.form['nombre_usuario']
+		email = request.form['email']
+		telefono = request.form['telefono']
+		pwd = request.form['pwd']
+		
+		cursor.execute(f"INSERT INTO Usuario (nombre, email, telefono, pwd) VALUE('{nombre}', '{email}', '{telefono}', '{pwd}');")
+		db.commit()
+
+	msg = Message("Gracias por Registrarte", sender="fernandamontoro7@gmail.com", recipients=[email])
+	msg.body = '''
+	Bienvenid@ a tu agenda!!!
+	'''
+	mail.send(msg)
+
+	return redirect(url_for('index'))
+
+@app.route('/login', methods=["POST"])
+def login():
+		nombre = request.form['usuario']
+		pwd = request.form['contrasena']
+			
+		cursor.execute(f"SELECT * FROM usuario WHERE nombre = '{nombre}' AND pwd = '{pwd}';")
+
+		result = cursor.fetchall()
+
+		if (len(result) == 0) :
+			return redirect(url_for('index'))
+		else :
+			session['nombre'] = result[0][1]
+			session['email'] = result[0][2]
+			session['telefono'] = result[0][3]
+			return redirect(url_for('clientes'))
+
+@app.route('/logout')
+def logout():
+		session.clear()
+		return redirect(url_for('presentacion'))
+
 
 @app.route('/correo')
 def correo():

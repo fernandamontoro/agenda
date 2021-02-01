@@ -11,16 +11,16 @@
 			<div class="main">
 				<div class="wrapper">
 					<h1>
-						<img src={{url_for('static', filename='lobo.PNG')}} height="200" width="200" >
+						<img src="{{url_for('static', filename='lobo.PNG')}}" height="200" width="200" >
 					<br><br>
 						<strong>Roter Wolf</strong>
 					</h1>
 			
 					<nav>
 						<ul class="menu"> <br><br><br>
-							<li><a class="active" href={{url_for("presentacion")}}>PRESENTACION</a></li>
-							<li><a href="registro.html">REGISTRO</a></li>
-							<li><a href="index.html">INICIO SESION</a></li>
+							<li><a class="active" href="{{url_for('presentacion')}}">PRESENTACION</a></li>
+							<li><a href="{{url_for('registro')}}">REGISTRO</a></li>
+							<li><a href="{{url_for('index')}}">INICIO SESION</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -47,7 +47,7 @@
 						<div class="indent-top">
 							<ul class="list-2"> 
 								<li>
-									<a class="item" >Agrega inifitos contactos</a>
+									<a class="item">Agrega inifitos contactos</a>
 									<span> Puedes agregar contactos sin limite </span>
 								</li>
 								<li>
