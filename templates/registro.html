@@ -57,7 +57,6 @@
 									<input type="password" name="password" required>
 								</div>
 								
-								<!-- Verificacion por numero telefonico -->
 								<div>
 									<div id="sendSMS">
 										<label>Ingresa un número para crear la cuenta</label>
@@ -85,21 +84,17 @@
 									
 								</div>
 							</form>
-							
-
 						</article>
 					</article>
 				</div>
 			</div>
 		</div>
 	</section>
-	
-<!-- The core Firebase JS SDK is always required and must be listed first -->
+
 <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js.map"></script>
 
 <script>
-    // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyARoFIBva4-5Ipw8u0TOvBlaN1lxcTJxH0",
         authDomain: "sms-verification-68ada.firebaseapp.com",
@@ -109,7 +104,7 @@
         messagingSenderId: "29249087898",
         appId: "1:29249087898:web:eea89c8616b58e1aebb223"
     };
-    // Initialize Firebase
+    
     firebase.initializeApp(firebaseConfig);
 </script>
 <script src="{{url_for('static', filename='js/PhoneNumber.js')}}" type="text/javascript"></script>
