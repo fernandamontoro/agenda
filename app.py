@@ -10,7 +10,7 @@ import os
 
 
 db = mysql.connector.connect(
-	host = "localhost",
+	host = "fernandamontoro.mysql.pythonanywhere-services.com", 
 	user = "root",
 	password = "root",
 	database = "Proyecto"

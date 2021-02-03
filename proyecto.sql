@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `proyecto`;
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: proyecto
@@ -45,6 +43,33 @@ LOCK TABLES `cliente` WRITE;
 INSERT INTO `cliente` VALUES (3,'Paty','MOSP','3121052057','las golondrinas','312109',''),(4,'cuca','cucas','318','andador','',''),(7,'luis','luisito','31201053057','el tiboli','',''),(11,'sofia lopez','sofilop','3116222','el dorado','3121165028','monsa@hotmail.com'),(12,'Gaby','MOSF','3120469845','AV. Lopez mateos','31210987465','fernanda@hotmail.com'),(18,'Jesus','JFSF66464','312565546','ANDADOR FRANCISCO VILLA','3121165028','juan@hotmail.com'),(22,'Emiliano Banda','bwkbk','1646','Valentin Gomez Farias #133','641641','bjksbkj'),(23,'Carlos','C57','3120469845','los olivos','3121051796','ed@hotmail.com');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telefono` varchar(45) NOT NULL,
+  `pwd` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'fernanda','16460114@colima.tecnm.mx','+523122197950','123'),(2,'carlos','grupomonsa66@hotmail.com','+523122197950','12345'),(3,'paty','grupomonsa66@hotmail.com','+523122197950','12345'),(4,'guadalupe','17460080@colima.tecnm.mx','+523121970653','12345'),(5,'maria','17460080@colima.tecnm.mx','+523121970653','123'),(6,'julio','m.llanos2199@gmail.com','+523122197950','159'),(7,'pepita','17460080@colima.tecnm.mx','+523122197950','159'),(8,'paco','grupomonsa66@hotmail.com','+523122197950','159'),(13,'pablo','grupomonsa66@hotmail.com','+523123045884','147'),(14,'luis','jvaquez2098@gmail.com','+523121122913','147'),(15,'luis j','jvazquez2098@gmail.com','+523121122913','159'),(16,'karlos','jvaquez2098@gmail.com','+523121122913','147'),(17,'quesito','jvaquez2098@gmail.com','+523121122913','111'),(18,'zarate','jvazquez2098@gmail.com','+523121122913','111'),(19,'gabriela','16460114@colima.tecnm.mx','+523122197950','123');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-02  2:39:01
+-- Dump completed on 2021-02-02 22:46:15
